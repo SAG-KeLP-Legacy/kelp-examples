@@ -20,6 +20,20 @@ import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllCla
 
 import java.util.List;
 
+/**
+ * Caching is an important feature of KeLP. In most of the cases, kernel computation 
+ * between two examples are useful in different step of the learning process. 
+ * If one caches this computation, the learning algorithm can be quicker, 
+ * as computation already done can be accessed directly from a cache. 
+ * For this reason, KeLP implements two types of caching.
+ * <p> 
+ * One is the norm cache, that is useful to cache the values of the norm in the kernel space. 
+ * The other is a kernel cache, that is the storage of the kernel computations. 
+ * <p>
+ * In the following , an example on how to use these two caches is provided.
+ * 
+ * @author Giuseppe Castellucci, Danilo Croce
+ */
 public class KernelCacheExample {
 
 	public static void main(String[] args) {

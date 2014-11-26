@@ -11,34 +11,19 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.K
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 
-/**
- * TODO
- * 
- * Let's start with a very simple Example, that is a classification example
- * based on a linear version of the Passive Aggressive algorithm.
+/** 
+ * This is a classification example based on the kernelized version of 
+ * the Passive Aggressive algorithm. A polynomial kernel is here 
+ * applied on the examples.
  * <p>
- * Dataset used are the ones used as examples in the svmlight. They have been
+ * Dataset used are the ones used in the svmlight website. They have been
  * modified to be read by KeLP. In fact, a single row in KeLP must indicate what
  * kind of vectors your are using, Sparse or Dense. In the svmlight dataset
- * there are Sparse vectors, so if you open the train.dat and test.dat files you
+ * there are Sparse vectors, so if you open the train.klp and test.klp files you
  * can notice that each vector is enclosed in BeginVector (|BV|) and EndVector
  * (|EV|) tags.
- * <p>
- * The following example will work by adding the following Maven dependency to
- * your code:
- * <p>
- * 
- * 
- * Here you can download the converted dataset and the complete Java class. This
- * example will work by
- * <p>
- * Training set (2000 examples, 1000 of class "+1" (positive), and 1000 of class
- * "-1" (negative)) Test set (600 examples, 300 of class "+1" (positive), and
- * 300 of class "-1" (negative)) HelloLearning.java
- * <p>
  * 
  * @author Giuseppe Castellucci, Danilo Croce
- * 
  */
 public class HelloKernelLearning {
 

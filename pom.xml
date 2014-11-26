@@ -1,11 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>it.uniroma2.sag.kelp</groupId>
-  <artifactId>kelp-examples</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>kelp-examples</name>
-  
-  <url>http://sag.art.uniroma2.it/demo-software/kelp/</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.uniroma2.sag.kelp</groupId>
+	<artifactId>kelp-examples</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>kelp-examples</name>
+
+	<url>http://sag.art.uniroma2.it/demo-software/kelp/</url>
 	<organization>
 		<name>Semantic Analytics Group @ Uniroma2</name>
 		<url>http://sag.art.uniroma2.it</url>
@@ -88,9 +89,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
@@ -123,5 +140,5 @@
 			<version>0.0.9-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-  
+
 </project>

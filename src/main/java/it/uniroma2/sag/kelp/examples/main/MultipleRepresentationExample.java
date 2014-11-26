@@ -1,0 +1,112 @@
+package it.uniroma2.sag.kelp.examples.main;
+
+import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
+import it.uniroma2.sag.kelp.data.example.Example;
+import it.uniroma2.sag.kelp.data.label.StringLabel;
+import it.uniroma2.sag.kelp.kernel.Kernel;
+import it.uniroma2.sag.kelp.kernel.standard.LinearKernelCombination;
+import it.uniroma2.sag.kelp.kernel.standard.NormalizationKernel;
+import it.uniroma2.sag.kelp.kernel.standard.PolynomialKernel;
+import it.uniroma2.sag.kelp.kernel.standard.RbfKernel;
+import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
+import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.KernelizedPassiveAggressiveClassification;
+import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
+import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
+
+public class MultipleRepresentationExample {
+
+	public static void main(String[] args) {
+		try {
+			// Read a dataset into a trainingSet variable
+			SimpleDataset trainingSet = new SimpleDataset();
+			trainingSet.populate("src/main/resources/multiplerepresentation/train.klp");
+			// Read a dataset into a test variable
+			SimpleDataset testSet = new SimpleDataset();
+			testSet.populate("src/main/resources/multiplerepresentation/test.klp");
+
+			// define the positive class
+			StringLabel positiveClass = new StringLabel("food");
+
+			// print some statistics
+			System.out.println("Training set statistics");
+			System.out.print("Examples number ");
+			System.out.println(trainingSet.getNumberOfExamples());
+			System.out.print("Positive examples ");
+			System.out.println(trainingSet
+					.getNumberOfPositiveExamples(positiveClass));
+			System.out.print("Negative examples ");
+			System.out.println(trainingSet
+					.getNumberOfNegativeExamples(positiveClass));
+
+			System.out.println("Test set statistics");
+			System.out.print("Examples number ");
+			System.out.println(testSet.getNumberOfExamples());
+			System.out.print("Positive examples ");
+			System.out.println(testSet
+					.getNumberOfPositiveExamples(positiveClass));
+			System.out.print("Negative examples ");
+			System.out.println(testSet
+					.getNumberOfNegativeExamples(positiveClass));
+
+			// instantiate a passive aggressive algorithm
+			KernelizedPassiveAggressiveClassification kPA = new KernelizedPassiveAggressiveClassification();
+			// indicate to the learner what is the positive class
+			kPA.setLabel(positiveClass);
+			// set an aggressiveness parameter
+			kPA.setC(2f);
+
+			// Kernel for the first representation (0-index)
+			Kernel linear = new LinearKernel("0");
+			// Normalize the linear kernel
+			NormalizationKernel normalizedKernel = new NormalizationKernel(
+					linear);
+			// Apply a Polynomial kernel on the score (normalized) computed by
+			// the linear kernel
+			Kernel polyKernel = new PolynomialKernel(2f, normalizedKernel);
+
+			// Kernel for the second representation (1-index)
+			Kernel linear1 = new LinearKernel("1");
+			// Normalize the linear kernel
+			NormalizationKernel normalizedKernel1 = new NormalizationKernel(
+					linear1);
+			// Apply a Polynomial kernel on the score (normalized) computed by
+			// the linear kernel
+			Kernel rbfKernel = new RbfKernel(1f, normalizedKernel1);
+			// tell the algorithm that the kernel we want to use in learning is
+			// the polynomial kernel
+
+			LinearKernelCombination linearCombination = new LinearKernelCombination();
+			linearCombination.addKernel(1f, polyKernel);
+			linearCombination.addKernel(1f, rbfKernel);
+			// normalize the weights such that their sum is 1
+			linearCombination.normalizeWeights();
+			
+			// set the kernel for the PA algorithm
+			kPA.setKernel(linearCombination);
+
+			// learn and get the prediction function
+			kPA.learn(trainingSet);
+			Classifier f = kPA.getPredictionFunction();
+
+			// classify examples and compute some statistics
+			int correct = 0;
+			for (Example e : testSet.getExamples()) {
+				ClassificationOutput p = f.predict(testSet.getNextExample());
+				if (p.getScore(positiveClass) > 0
+						&& e.isExampleOf(positiveClass))
+					correct++;
+				else if (p.getScore(positiveClass) < 0
+						&& !e.isExampleOf(positiveClass))
+					correct++;
+			}
+
+			System.out
+					.println("Accuracy: "
+							+ ((float) correct / (float) testSet
+									.getNumberOfExamples()));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+}

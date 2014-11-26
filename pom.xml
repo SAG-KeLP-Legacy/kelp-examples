@@ -90,5 +90,43 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>standard-kernel</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>tree-kernel</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>smoothedtreekernel</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>online-large-margin</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>batch-large-margin</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>vector-representation</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>kernel-clustering</artifactId>
+			<version>0.0.9-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
   
 </project>

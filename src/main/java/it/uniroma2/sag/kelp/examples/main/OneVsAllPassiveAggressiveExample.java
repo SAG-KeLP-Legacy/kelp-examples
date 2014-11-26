@@ -16,6 +16,12 @@ import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllCla
 
 import java.util.List;
 
+/**
+ * This example illustrates how to perform multiclass classification,
+ * with a One-Vs-All strategy with the Passive Aggressive Algorithm.
+ * 
+ * @author Giuseppe Castellucci, Danilo Croce
+ */
 public class OneVsAllPassiveAggressiveExample {
 
 	public static void main(String[] args) {

@@ -13,6 +13,21 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.K
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 
+/**
+ * 
+ * KeLP supports natively a multiple representation formalism. 
+ * It is useful, for example, when the same data can be represented by different 
+ * observable properties. 
+ * <p>
+ * For example, in NLP one can decide to derive features of a sentence for 
+ * different syntactic levels (e.g. part-of-speech, chunk, dependency) and 
+ * treat them in a learning algorithms with different kernel functions.
+ * 
+ * This example illustrates how to leverage on KeLP ability to work
+ * with multiple representations.
+ * 
+ * @author Giuseppe Castellucci, Danilo Croce
+ */
 public class MultipleRepresentationExample {
 
 	public static void main(String[] args) {

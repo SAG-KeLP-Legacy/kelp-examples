@@ -13,6 +13,12 @@ import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 
 import java.util.List;
 
+/**
+ * This example illustrates how to perform multiclass classification,
+ * with a One-Vs-All strategy with SVM.
+ * 
+ * @author Giuseppe Castellucci, Danilo Croce
+ */
 public class OneVsAllSVMExample {
 
 	public static void main(String[] args) {

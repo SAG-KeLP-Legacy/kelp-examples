@@ -7,6 +7,19 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.L
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 
+/** 
+ * This is a very simple classification example
+ * based on a linear version of the Passive Aggressive algorithm.
+ * <p>
+ * Dataset used are the ones used in the svmlight website. They have been
+ * modified to be read by KeLP. In fact, a single row in KeLP must indicate what
+ * kind of vectors your are using, Sparse or Dense. In the svmlight dataset
+ * there are Sparse vectors, so if you open the train.klp and test.klp files you
+ * can notice that each vector is enclosed in BeginVector (|BV|) and EndVector
+ * (|EV|) tags.
+ * 
+ * @author Giuseppe Castellucci, Danilo Croce
+ */
 public class HelloLearning {
 	
 	public static void main(String[] args) {

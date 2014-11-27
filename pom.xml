@@ -70,10 +70,38 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
-					<additionalparam>-header &apos;&lt;script
-						type=&quot;text/javascript&quot;
-						src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;&gt;&lt;/script&gt;&apos;</additionalparam>
+					<additionalparam>-header &apos;&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;&gt;&lt;/script&gt;&apos;</additionalparam>
 				</configuration>
+				<executions>
+					<execution>
+						<id>javadoc-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<!-- switch on dependency-driven aggregation -->
+							<includeDependencySources>true</includeDependencySources>
+							<!-- <dependencySourceExcludes> -->
+							<!-- <dependencySourceExclude>commons-lang:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>dom4j:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>guava:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>ejml:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>jackson-*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>java-assist:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>jsr305:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>reflections:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>slf4j-*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>trove4j:*</dependencySourceExclude> -->
+							<!-- <dependencySourceExclude>xml-apis:*</dependencySourceExclude> -->
+							<!-- </dependencySourceExcludes> -->
+							<dependencySourceIncludes>
+								<!-- include ONLY dependencies I control -->
+								<dependencySourceInclude>it.uniroma2.sag.kelp:*</dependencySourceInclude>
+							</dependencySourceIncludes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
@@ -115,7 +143,17 @@
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>core</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>vector-representation</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>it.uniroma2.sag.kelp</groupId>
+			<artifactId>discreterepresentation</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

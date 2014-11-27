@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.uniroma2.sag.kelp</groupId>
 	<artifactId>kelp-examples</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>kelp-examples</name>
 
 	<url>http://sag.art.uniroma2.it/demo-software/kelp/</url>
@@ -96,32 +96,32 @@
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>standard-kernel</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>tree-kernel</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>online-large-margin</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>batch-large-margin</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>vector-representation</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
 			<artifactId>kernel-clustering</artifactId>
-			<version>0.0.9-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 

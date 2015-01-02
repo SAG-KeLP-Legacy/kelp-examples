@@ -25,12 +25,14 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmCl
 import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification.OneVsAllLearning;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
+import it.uniroma2.sag.kelp.utils.evaluation.F1Evaluator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This example illustrates how to perform multiclass classification,
- * with a One-Vs-All strategy with SVM.
+ * This example illustrates how to perform multiclass classification, with a
+ * One-Vs-All strategy with SVM.
  * 
  * @author Giuseppe Castellucci, Danilo Croce
  */
@@ -68,7 +70,7 @@ public class OneVsAllSVMExample {
 			// instantiate an svmsolver
 			BinaryCSvmClassification svmSolver = new BinaryCSvmClassification();
 			svmSolver.setKernel(normalizedKernel);
-			svmSolver.setCp(2);
+			svmSolver.setCp(1);
 			svmSolver.setCn(1);
 			
 			OneVsAllLearning ovaLearner = new OneVsAllLearning();
@@ -80,22 +82,17 @@ public class OneVsAllSVMExample {
 			Classifier f = ovaLearner.getPredictionFunction();
 
 			// classify examples and compute some statistics
-			int correct = 0;
+			F1Evaluator ev = new F1Evaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-//				System.out.println(p.getPredictedClasses());
-				if (e.isExampleOf(p.getPredictedClasses().get(0))) {
-					correct++;
-				}
+				ev.addCount(e, p.getPredictedClasses().get(0));
 			}
 
 			System.out
-					.println("Accuracy: "
-							+ ((float) correct / (float) testSet
-									.getNumberOfExamples()));
+					.println("Mean F1: "
+							+ ev.getPerformanceMeasure("getMeanF1", null));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
-
 }

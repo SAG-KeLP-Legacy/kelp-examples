@@ -18,6 +18,7 @@ package it.uniroma2.sag.kelp.examples.main;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.label.Label;
+import it.uniroma2.sag.kelp.data.label.StringLabel;
 import it.uniroma2.sag.kelp.kernel.Kernel;
 import it.uniroma2.sag.kelp.kernel.standard.NormalizationKernel;
 import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
@@ -83,14 +84,25 @@ public class OneVsAllSVMExample {
 
 			// classify examples and compute some statistics
 			F1Evaluator ev = new F1Evaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
+			
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
 				ev.addCount(e, p.getPredictedClasses().get(0));
 			}
+			
+			ArrayList<Label> twoLabels = new ArrayList<Label>();
+			twoLabels.add(new StringLabel("iris-setosa"));
+			twoLabels.add(new StringLabel("iris-virginica"));
+			
+			Object[] as = new Object[1];
+			as[0] = twoLabels;
 
 			System.out
 					.println("Mean F1: "
 							+ ev.getPerformanceMeasure("getMeanF1", null));
+			System.out
+			.println("Mean F1: "
+					+ ev.getPerformanceMeasure("getMeanF1For", as));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

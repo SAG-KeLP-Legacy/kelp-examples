@@ -26,7 +26,7 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmCl
 import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification.OneVsAllLearning;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
-import it.uniroma2.sag.kelp.utils.evaluation.F1Evaluator;
+import it.uniroma2.sag.kelp.utils.evaluation.ClassificationEvaluator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +83,11 @@ public class OneVsAllSVMExample {
 			Classifier f = ovaLearner.getPredictionFunction();
 
 			// classify examples and compute some statistics
-			F1Evaluator ev = new F1Evaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
+			ClassificationEvaluator ev = new ClassificationEvaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
 			
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-				ev.addCount(e, p.getPredictedClasses().get(0));
+				ev.addCount(e,p);
 			}
 			
 			ArrayList<Label> twoLabels = new ArrayList<Label>();

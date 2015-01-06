@@ -99,7 +99,7 @@ public class OneVsAllSVMExample {
 
 			System.out
 					.println("Mean F1: "
-							+ ev.getPerformanceMeasure("getMeanF1", null));
+							+ ev.getPerformanceMeasure("getMeanF1"));
 			System.out
 			.println("Mean F1: "
 					+ ev.getPerformanceMeasure("getMeanF1For", as));

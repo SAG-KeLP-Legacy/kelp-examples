@@ -142,7 +142,7 @@ public class KernelCacheExample {
 
 			System.out
 			.println("Accuracy: "
-					+ ev.getPerformanceMeasure("getAccuracy", null));
+					+ ev.getPerformanceMeasure("getAccuracy"));
 			
 			System.out.println("Learning time without cache: " + (endLearningTime-startLearningTime) + " ms");
 		} catch (Exception e1) {

@@ -123,42 +123,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>standard-kernel</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>tree-kernel</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>online-large-margin</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>batch-large-margin</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>core</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>vector-representation</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>discreterepresentation</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>kernel-clustering</artifactId>
+			<artifactId>kelp-full</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

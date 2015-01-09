@@ -83,14 +83,14 @@ public class OneVsAllSVMExample {
 			Classifier f = ovaLearner.getPredictionFunction();
 
 			// classify examples and compute some statistics
-			ClassificationEvaluator ev = new ClassificationEvaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
+			ClassificationEvaluator ev = new ClassificationEvaluator(trainingSet.getClassificationLabels());
 			
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
 				ev.addCount(e,p);
 			}
 			
-			ArrayList<Label> twoLabels = new ArrayList<Label>();
+			List<Label> twoLabels = new ArrayList<Label>();
 			twoLabels.add(new StringLabel("iris-setosa"));
 			twoLabels.add(new StringLabel("iris-virginica"));
 			

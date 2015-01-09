@@ -32,10 +32,8 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification
 import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.KernelizedPassiveAggressiveClassification;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllClassifier;
-import it.uniroma2.sag.kelp.utils.evaluation.AccuracyEvaluator;
 import it.uniroma2.sag.kelp.utils.evaluation.ClassificationEvaluator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -133,7 +131,7 @@ public class KernelCacheExample {
 			linearCombination.disableCache();
 			
 			// classify examples and compute some statistics
-			ClassificationEvaluator ev = new ClassificationEvaluator((ArrayList<Label>) trainingSet.getClassificationLabels());
+			ClassificationEvaluator ev = new ClassificationEvaluator(trainingSet.getClassificationLabels());
 			for (Example e : testSet.getExamples()) {
 				OneVsAllClassificationOutput prediction = f.predict(e);
 				System.out.println(e.getLabels()[0] + "\t" + prediction.getPredictedClasses().get(0));

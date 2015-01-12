@@ -26,7 +26,7 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmCl
 import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification.OneVsAllLearning;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
-import it.uniroma2.sag.kelp.utils.evaluation.ClassificationEvaluator;
+import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +43,9 @@ public class OneVsAllSVMExample {
 		try {
 			// Read a dataset into a trainingSet variable
 			SimpleDataset trainingSet = new SimpleDataset();
-			trainingSet.populate("src/main/resources/iris_dataset/iris_train.klp");
-			
+			trainingSet
+					.populate("src/main/resources/iris_dataset/iris_train.klp");
+
 			SimpleDataset testSet = new SimpleDataset();
 			testSet.populate("src/main/resources/iris_dataset/iris_test.klp");
 
@@ -52,17 +53,21 @@ public class OneVsAllSVMExample {
 			System.out.println("Training set statistics");
 			System.out.print("Examples number ");
 			System.out.println(trainingSet.getNumberOfExamples());
-			
+
 			List<Label> classes = trainingSet.getClassificationLabels();
-			
+
 			for (Label l : classes) {
-				System.out.println("Training Label " + l.toString() + " " + trainingSet.getNumberOfPositiveExamples(l));
-				System.out.println("Training Label " + l.toString() + " " + trainingSet.getNumberOfNegativeExamples(l));
-				
-				System.out.println("Test Label " + l.toString() + " " + testSet.getNumberOfPositiveExamples(l));
-				System.out.println("Test Label " + l.toString() + " " + testSet.getNumberOfNegativeExamples(l));
+				System.out.println("Training Label " + l.toString() + " "
+						+ trainingSet.getNumberOfPositiveExamples(l));
+				System.out.println("Training Label " + l.toString() + " "
+						+ trainingSet.getNumberOfNegativeExamples(l));
+
+				System.out.println("Test Label " + l.toString() + " "
+						+ testSet.getNumberOfPositiveExamples(l));
+				System.out.println("Test Label " + l.toString() + " "
+						+ testSet.getNumberOfNegativeExamples(l));
 			}
-			
+
 			// Kernel for the first representation (0-index)
 			Kernel linear = new LinearKernel("0");
 			// Normalize the linear kernel
@@ -73,36 +78,37 @@ public class OneVsAllSVMExample {
 			svmSolver.setKernel(normalizedKernel);
 			svmSolver.setCp(1);
 			svmSolver.setCn(1);
-			
+
 			OneVsAllLearning ovaLearner = new OneVsAllLearning();
 			ovaLearner.setBaseAlgorithm(svmSolver);
 			ovaLearner.setLabels(classes);
-			
+
 			// learn and get the prediction function
 			ovaLearner.learn(trainingSet);
 			Classifier f = ovaLearner.getPredictionFunction();
 
 			// classify examples and compute some statistics
-			ClassificationEvaluator ev = new ClassificationEvaluator(trainingSet.getClassificationLabels());
-			
+			MulticlassClassificationEvaluator ev = new MulticlassClassificationEvaluator(
+					trainingSet.getClassificationLabels());
+
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-				ev.addCount(e,p);
+				ev.addCount(e, p);
 			}
-			
+
 			List<Label> twoLabels = new ArrayList<Label>();
 			twoLabels.add(new StringLabel("iris-setosa"));
 			twoLabels.add(new StringLabel("iris-virginica"));
-			
+
 			Object[] as = new Object[1];
 			as[0] = twoLabels;
 
-			System.out
-					.println("Mean F1: "
-							+ ev.getPerformanceMeasure("getMeanF1"));
-			System.out
-			.println("Mean F1: "
+			System.out.println("Mean F1: "
+					+ ev.getPerformanceMeasure("getMeanF1"));
+			System.out.println("Mean F1: "
 					+ ev.getPerformanceMeasure("getMeanF1For", as));
+			System.out.println("F1: "
+					+ ev.getPerformanceMeasure("getOverallF1"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

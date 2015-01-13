@@ -22,7 +22,6 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.L
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
-import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
 /**
  * This is a very simple classification example based on a linear version of the

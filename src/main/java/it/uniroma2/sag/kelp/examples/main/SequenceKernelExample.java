@@ -73,7 +73,7 @@ public class SequenceKernelExample {
 			// Normalize the linear kernel
 			NormalizationKernel normalizedKernel = new NormalizationKernel(
 					kernel);
-			kernel.setNormCache(new FixIndexSquaredNormCache(trainingSet.getNumberOfExamples()));
+			kernel.setSquaredNormCache(new FixIndexSquaredNormCache(trainingSet.getNumberOfExamples()));
 			kernel.setKernelCache(new FixIndexKernelCache(trainingSet.getNumberOfExamples()));
 			// instantiate an svmsolver
 			BinaryCSvmClassification svmSolver = new BinaryCSvmClassification();

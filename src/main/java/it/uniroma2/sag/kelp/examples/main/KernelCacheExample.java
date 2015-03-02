@@ -113,7 +113,7 @@ public class KernelCacheExample {
 			kPA.setKernel(linearCombination);
 			// assign the cache to the kernel
 			linear.setKernelCache(cache);
-			linear.setNormCache(normCache);
+			linear.setSquaredNormCache(normCache);
 
 			// Instantiate a OneVsAll learning algorithm
 			// It is a so called meta learner, it receives in input a binary

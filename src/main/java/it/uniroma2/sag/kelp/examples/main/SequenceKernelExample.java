@@ -18,36 +18,36 @@ package it.uniroma2.sag.kelp.examples.main;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.data.example.Example;
 import it.uniroma2.sag.kelp.data.label.Label;
-import it.uniroma2.sag.kelp.data.label.StringLabel;
 import it.uniroma2.sag.kelp.kernel.Kernel;
+import it.uniroma2.sag.kelp.kernel.cache.FixIndexKernelCache;
+import it.uniroma2.sag.kelp.kernel.cache.FixIndexSquaredNormCache;
+import it.uniroma2.sag.kelp.kernel.sequence.SequenceKernel;
 import it.uniroma2.sag.kelp.kernel.standard.NormalizationKernel;
-import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 import it.uniroma2.sag.kelp.learningalgorithm.classification.libsvm.BinaryCSvmClassification;
 import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification.OneVsAllLearning;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This example illustrates how to perform multiclass classification, with a
- * One-Vs-All strategy with SVM.
+ * This example illustrates how to use the sequence kernel on a
+ * Sentiment Analysis task.
  * 
  * @author Giuseppe Castellucci, Danilo Croce
  */
-public class OneVsAllSVMExample {
+public class SequenceKernelExample {
 
 	public static void main(String[] args) {
 		try {
 			// Read a dataset into a trainingSet variable
 			SimpleDataset trainingSet = new SimpleDataset();
 			trainingSet
-					.populate("src/main/resources/iris_dataset/iris_train.klp");
+					.populate("src/main/resources/sequenceKernelExample/sequenceTrain.txt");
 
 			SimpleDataset testSet = new SimpleDataset();
-			testSet.populate("src/main/resources/iris_dataset/iris_test.klp");
+			testSet.populate("src/main/resources/sequenceKernelExample/sequenceTest.txt");
 
 			// print some statistics
 			System.out.println("Training set statistics");
@@ -69,10 +69,12 @@ public class OneVsAllSVMExample {
 			}
 
 			// Kernel for the first representation (0-index)
-			Kernel linear = new LinearKernel("0");
+			Kernel kernel = new SequenceKernel("SEQUENCE", 2, 1);
 			// Normalize the linear kernel
 			NormalizationKernel normalizedKernel = new NormalizationKernel(
-					linear);
+					kernel);
+			kernel.setSquaredNormCache(new FixIndexSquaredNormCache(trainingSet.getNumberOfExamples()));
+			kernel.setKernelCache(new FixIndexKernelCache(trainingSet.getNumberOfExamples()));
 			// instantiate an svmsolver
 			BinaryCSvmClassification svmSolver = new BinaryCSvmClassification();
 			svmSolver.setKernel(normalizedKernel);
@@ -96,19 +98,8 @@ public class OneVsAllSVMExample {
 				ev.addCount(e, p);
 			}
 
-			List<Label> twoLabels = new ArrayList<Label>();
-			twoLabels.add(new StringLabel("iris-setosa"));
-			twoLabels.add(new StringLabel("iris-virginica"));
-
-			Object[] as = new Object[1];
-			as[0] = twoLabels;
-
-			System.out.println("Mean F1: "
-					+ ev.getPerformanceMeasure("getMeanF1"));
-			System.out.println("Mean F1: "
-					+ ev.getPerformanceMeasure("getMeanF1For", as));
-			System.out.println("F1: "
-					+ ev.getPerformanceMeasure("getOverallF1"));
+			System.out.println("Accuracy: "
+					+ ev.getPerformanceMeasure("getAccuracy"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

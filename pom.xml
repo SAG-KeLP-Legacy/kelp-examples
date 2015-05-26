@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.uniroma2.sag.kelp</groupId>
 	<artifactId>kelp-examples</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<name>kelp-examples</name>
 
 	<url>http://sag.art.uniroma2.it/demo-software/kelp/</url>
@@ -67,43 +67,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<additionalparam>-header &apos;&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML&quot;&gt;&lt;/script&gt;&apos;</additionalparam>
-				</configuration>
-				<executions>
-					<execution>
-						<id>javadoc-jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<!-- switch on dependency-driven aggregation -->
-							<includeDependencySources>true</includeDependencySources>
-							<!-- <dependencySourceExcludes> -->
-							<!-- <dependencySourceExclude>commons-lang:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>dom4j:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>guava:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>ejml:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>jackson-*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>java-assist:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>jsr305:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>reflections:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>slf4j-*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>trove4j:*</dependencySourceExclude> -->
-							<!-- <dependencySourceExclude>xml-apis:*</dependencySourceExclude> -->
-							<!-- </dependencySourceExcludes> -->
-							<dependencySourceIncludes>
-								<!-- include ONLY dependencies I control -->
-								<dependencySourceInclude>it.uniroma2.sag.kelp:*</dependencySourceInclude>
-							</dependencySourceIncludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1.1</version>
 				<executions>
@@ -123,43 +86,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>standard-kernel</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>tree-kernel</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>online-large-margin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>batch-large-margin</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>core</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>vector-representation</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>discreterepresentation</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>it.uniroma2.sag.kelp</groupId>
-			<artifactId>kernel-clustering</artifactId>
-			<version>1.0.0</version>
+			<artifactId>kelp-full</artifactId>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

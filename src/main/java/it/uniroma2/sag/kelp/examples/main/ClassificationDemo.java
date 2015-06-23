@@ -6,7 +6,6 @@ import it.uniroma2.sag.kelp.data.label.Label;
 import it.uniroma2.sag.kelp.learningalgorithm.classification.ClassificationLearningAlgorithm;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
-import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
 import it.uniroma2.sag.kelp.utils.evaluation.Evaluator;
 import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;

@@ -6,14 +6,13 @@ import it.uniroma2.sag.kelp.data.label.Label;
 import it.uniroma2.sag.kelp.learningalgorithm.classification.ClassificationLearningAlgorithm;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
+import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
 import it.uniroma2.sag.kelp.utils.evaluation.Evaluator;
 import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
 import java.io.File;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ClassificationDemo {
 
@@ -29,7 +28,7 @@ public class ClassificationDemo {
 		String testfilePath = args[1];
 		String learningAlgoPath = args[2];
 
-		ObjectMapper serializer = new ObjectMapper();
+		JacksonSerializerWrapper serializer = new JacksonSerializerWrapper();
 		ClassificationLearningAlgorithm learningAlgorithm = serializer.readValue(new File(learningAlgoPath), ClassificationLearningAlgorithm.class);
 		
 		System.out.println(serializer.writeValueAsString(learningAlgorithm));

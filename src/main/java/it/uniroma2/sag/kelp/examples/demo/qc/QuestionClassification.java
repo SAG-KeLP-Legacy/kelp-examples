@@ -15,7 +15,6 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
-import it.uniroma2.sag.kelp.utils.ObjectSerializer;
 
 import java.util.List;
 

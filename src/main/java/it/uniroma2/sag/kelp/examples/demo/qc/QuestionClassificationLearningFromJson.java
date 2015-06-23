@@ -47,7 +47,7 @@ public class QuestionClassificationLearningFromJson {
 			OneVsAllLearning ovaLearner = serializer
 					.readValue(
 							new File(
-									"src/main/resources/qc/pa_ptk_grct.txt"),
+									"src/main/resources/qc/learningAlgorithmSpecification.klp"),
 							OneVsAllLearning.class);
 
 			// learn and get the prediction function

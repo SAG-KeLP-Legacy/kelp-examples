@@ -31,8 +31,6 @@ public class TweetSentimentAnalysisSemeval2013 {
 	private static String errors_file = "src/main/resources/tweetSentiment2013/errors.txt";
 
 	public static void main(String[] args) throws Exception {
-//		System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "WARN");
-
 		float split = 0.8f;
 		String train_file = "src/main/resources/tweetSentiment2013/train.klp.gz";
 		String test_file = "src/main/resources/tweetSentiment2013/test.klp.gz";
@@ -40,15 +38,18 @@ public class TweetSentimentAnalysisSemeval2013 {
 		float polyD = 0;
 		float gamma = 0;
 
-		float[] Cs = new float[]{0.1f,0.5f,1f,2f};
+		float[] Cs = new float[] { 0.1f, 0.5f, 1f };
 
+		// Read a dataset into a test variable
 		SimpleDataset trainingSet = new SimpleDataset();
 		trainingSet.populate(train_file);
 		// Read a dataset into a test variable
 		SimpleDataset testSet = new SimpleDataset();
 		testSet.populate(test_file);
+		// set the cache size
 		int cacheSize = trainingSet.getNumberOfExamples()
 				+ testSet.getNumberOfExamples();
+		// Initialize a kernel
 		Kernel kernel = null;
 		switch (kernelmode) {
 		case 1:
@@ -74,10 +75,11 @@ public class TweetSentimentAnalysisSemeval2013 {
 			break;
 		}
 
+		// Find optimal C
 		float c = tune(trainingSet, kernel, split, Cs);
 		System.out.println("start testing with C=" + c);
+		// test
 		float f1 = test(trainingSet, kernel, c, testSet, true);
-
 		System.out.println("Mean F1 on test set=" + f1);
 	}
 
@@ -86,24 +88,32 @@ public class TweetSentimentAnalysisSemeval2013 {
 			throws NoSuchPerformanceMeasureException, IOException {
 		ArrayList<Label> classes = (ArrayList<Label>) trainingSet
 				.getClassificationLabels();
+
+		// Instantiate an svmSolver
 		BinaryCSvmClassification svmSolver = new BinaryCSvmClassification();
 		svmSolver.setKernel(kernel);
 		svmSolver.setCp(c);
 		svmSolver.setCn(c);
 		svmSolver.setFairness(true);
 
+		// Instantiate a OneVsAll multiclassification schema
 		OneVsAllLearning ovaLearner = new OneVsAllLearning();
 		ovaLearner.setBaseAlgorithm(svmSolver);
 		ovaLearner.setLabels(classes);
+		// Learn
 		ovaLearner.learn(trainingSet);
-		
 
+		// Get and save on file the learning and prediction Function
 		OneVsAllClassifier f = ovaLearner.getPredictionFunction();
-		if (printErrors) {
-			ObjectSerializer serializer = new JacksonSerializerWrapper();
-			serializer.writeValueOnFile(ovaLearner, "src/main/resources/tweetSentiment2013/learningAlgorithmSpecification.klp");
-			serializer.writeValueOnFile(f, "src/main/resources/tweetSentiment2013/classificationAlgorithm.klp");
-		}
+		ObjectSerializer serializer = new JacksonSerializerWrapper();
+		serializer
+				.writeValueOnFile(ovaLearner,
+						"src/main/resources/tweetSentiment2013/learningAlgorithmSpecification.klp");
+		serializer
+				.writeValueOnFile(f,
+						"src/main/resources/tweetSentiment2013/classificationAlgorithm.klp");
+
+		// Adopt a built-in evaluator
 		MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator(
 				classes);
 		PrintStream ps = null;
@@ -157,8 +167,7 @@ public class TweetSentimentAnalysisSemeval2013 {
 		Object[] args = new Object[1];
 		args[0] = posNeg;
 
-		b.append(evaluator.getPerformanceMeasure("MeanF1For", args)
-				+ FIELD_SEP);
+		b.append(evaluator.getPerformanceMeasure("MeanF1For", args) + FIELD_SEP);
 		b.append(evaluator.getPerformanceMeasure("MeanF1"));
 
 		System.out.println(b.toString());
@@ -174,14 +183,17 @@ public class TweetSentimentAnalysisSemeval2013 {
 	}
 
 	private static float tune(SimpleDataset allTrainingSet, Kernel kernel,
-			float split, float[] cs) throws NoSuchPerformanceMeasureException, IOException {
+			float split, float[] cs) throws NoSuchPerformanceMeasureException,
+			IOException {
 		float bestC = 0.0f;
 		float bestF1 = -Float.MAX_VALUE;
 
+		// Split data according to a fix split
 		Dataset[] split2 = allTrainingSet
 				.splitClassDistributionInvariant(split);
 		SimpleDataset trainingSet = (SimpleDataset) split2[0];
 		SimpleDataset testSet = (SimpleDataset) split2[1];
+		// tune parameter C
 		for (float c : cs) {
 			float f1 = test(trainingSet, kernel, c, testSet, false);
 			System.out.println("C:" + c + "\t" + f1);

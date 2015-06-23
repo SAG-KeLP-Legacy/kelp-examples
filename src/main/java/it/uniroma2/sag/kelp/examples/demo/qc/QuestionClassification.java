@@ -39,6 +39,7 @@ public class QuestionClassification {
 			System.out.print("Examples number ");
 			System.out.println(trainingSet.getNumberOfExamples());
 
+			// Set the cache size
 			int cacheSize = trainingSet.getNumberOfExamples()
 					+ testSet.getNumberOfExamples();
 
@@ -56,8 +57,8 @@ public class QuestionClassification {
 						+ testSet.getNumberOfNegativeExamples(l));
 			}
 
+			// Initialize the kernel function
 			Kernel usedKernel = null;
-
 			if (tkString.equalsIgnoreCase("stk")) {
 				// Kernel for the first representation (0-index)
 				Kernel stkgrct = new SubTreeKernel(0.4f, "grct");
@@ -80,10 +81,10 @@ public class QuestionClassification {
 				Kernel normPtkGrct = new NormalizationKernel(ptkgrct);
 				usedKernel = normPtkGrct;
 			}
-
+			// Set cache to the kernel
 			usedKernel.setKernelCache(new FixIndexKernelCache(cacheSize));
 
-			ObjectSerializer serializer = new JacksonSerializerWrapper();
+			JacksonSerializerWrapper serializer = new JacksonSerializerWrapper();
 
 			// instantiate an svmsolver
 			BinaryCSvmClassification svmSolver = new BinaryCSvmClassification();
@@ -100,6 +101,7 @@ public class QuestionClassification {
 			// learn and get the prediction function
 			ovaLearner.learn(trainingSet);
 			Classifier f = ovaLearner.getPredictionFunction();
+			// Write the model (aka the Classifier for further use)
 			serializer.writeValueOnFile(f,
 					"src/main/resources/qc/classificationAlgorithm.klp");
 
@@ -107,13 +109,10 @@ public class QuestionClassification {
 			int correct = 0;
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-//				System.out.println(e.getLabels()[0] + " "
-//						+ p.getPredictedClasses());
 				if (e.isExampleOf(p.getPredictedClasses().get(0))) {
 					correct++;
 				}
 			}
-
 			System.out
 					.println("Accuracy: "
 							+ ((float) correct / (float) testSet
@@ -122,5 +121,4 @@ public class QuestionClassification {
 			e1.printStackTrace();
 		}
 	}
-
 }

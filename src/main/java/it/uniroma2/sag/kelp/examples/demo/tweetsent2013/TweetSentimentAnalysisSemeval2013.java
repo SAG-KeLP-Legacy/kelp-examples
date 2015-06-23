@@ -108,10 +108,10 @@ public class TweetSentimentAnalysisSemeval2013 {
 		ObjectSerializer serializer = new JacksonSerializerWrapper();
 		serializer
 				.writeValueOnFile(ovaLearner,
-						"src/main/resources/tweetSentiment2013/learningAlgorithmSpecification.klp");
+						"src/main/resources/tweetSentiment2013/learningAlgorithmSpecification_multi.klp");
 		serializer
 				.writeValueOnFile(f,
-						"src/main/resources/tweetSentiment2013/classificationAlgorithm.klp");
+						"src/main/resources/tweetSentiment2013/classificationAlgorithm_bow_ws.klp");
 
 		// Adopt a built-in evaluator
 		MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator(

@@ -2,8 +2,8 @@
   "algorithm" : "oneVsAll",
   "baseAlgorithm" : {
     "algorithm" : "binaryCSvmClassification",
-    "cp" : 0.5,
-    "cn" : 0.5,
+    "cp" : 0.1,
+    "cn" : 0.1,
     "kernel" : {
       "kernelType" : "linearComb",
       "kernelID" : 1,

@@ -14,8 +14,6 @@ import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 import java.io.File;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class ClassificationDemo {
 
 	public static void main(String[] args) throws Exception {
@@ -30,10 +28,10 @@ public class ClassificationDemo {
 		String testfilePath = args[1];
 		String learningAlgoPath = args[2];
 
-		ObjectMapper mapper = new ObjectMapper();
-		ClassificationLearningAlgorithm learningAlgorithm = mapper.readValue(new File(learningAlgoPath), ClassificationLearningAlgorithm.class);
-		JacksonSerializerWrapper wrapper = new JacksonSerializerWrapper();
-		System.out.println(wrapper.writeValueAsString(learningAlgorithm));
+		JacksonSerializerWrapper serializer = new JacksonSerializerWrapper();
+		ClassificationLearningAlgorithm learningAlgorithm = serializer.readValue(new File(learningAlgoPath), ClassificationLearningAlgorithm.class);
+		
+		System.out.println(serializer.writeValueAsString(learningAlgorithm));
 	
 		SimpleDataset trainDataset = new SimpleDataset();
 		trainDataset.populate(trainfilePath);

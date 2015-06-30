@@ -15,6 +15,7 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
+import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class QuestionClassification {
 			SimpleDataset testSet = new SimpleDataset();
 			testSet.populate("src/main/resources/qc/TREC_10.coarse.klp.gz");
 
-			String tkString = "stk";
+			String tkString = "bow";
 
 			// print some statistics
 			System.out.println("Training set statistics");
@@ -105,17 +106,16 @@ public class QuestionClassification {
 					"src/main/resources/qc/classificationAlgorithm.klp");
 
 			// classify examples and compute some statistics
-			int correct = 0;
+			MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator(classes);
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-				if (e.isExampleOf(p.getPredictedClasses().get(0))) {
-					correct++;
-				}
+				evaluator.addCount(e, p);
 			}
+			evaluator.compute();
+			
 			System.out
 					.println("Accuracy: "
-							+ ((float) correct / (float) testSet
-									.getNumberOfExamples()));
+							+ evaluator.getAccuracy());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

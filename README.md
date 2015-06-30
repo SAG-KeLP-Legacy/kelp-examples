@@ -15,6 +15,25 @@ git clone https://github.com/SAG-KeLP/kelp-examples.git
 ```
 
 
+## What you can find in the kelp-examples package
+
+#### Classification:
+* **QuestionClassification** (it.uniroma2.sag.kelp.examples.demo.qc): this class implements the Question Classification demo. It includes both kernel operating on vectors and kernel operating on trees (stk and ptk).
+* **QuestionClassificationLearningFromJson** (it.uniroma2.examples.demo.qc): the same demo as QuestionClassificaiton with the difference that the learning algorithm specification is read from a Json file.
+* **RCV1BinaryTextCategorizationLibLinear**, **RCV1BinaryTextCategorizationPA** and **RCV1BinaryTextCategorizationPegasos** (it.uniroma2.sag.kelp.examples.demo.rcv1) are examples of binary classifiers on the RCV1 dataset that can be found on the LibLinear website. These classes perform a N-Fold Cross Validation and show KeLP facilities to divide a dataset in N-Fold.
+* **TweetSentimentAnalysisSemeval2013** (it.uniroma2.sag.kelp.examples.demo.tweetsent2013): a demo with multiple kernels and multiple classes on a dataset on Twitter Sentiment Analysis from Semeval2013.
+* **OneVsAllSVMExample** (it.uniroma2.sag.kelp.examples.main): an example that shows the usage of the OneVsAll strategy with SVM over the IRIS dataset.
+* **SequenceKernelExample** (it.uniroma2.sag.kelp.examples.main): an example that shows the usage of a Sequence Kernel.
+* **MultipleRepresentationExample** (it.uniroma2.sag.kelp.examples.main): a basic example showing the usage of multiple representations with multiple kernel functions with a PassiveAggressive algorithm.
+* **KernelCacheExample** (it.uniroma2.sag.kelp.examples.main): an example that shows the usage of the KernelCache class to store the already computed kernel values between instances.
+
+#### Regression:
+* **EpsilonSVRegressionExample** (it.uniroma2.sag.kelp.examples.demo.regression): This class contains an example of the usage of the Regression Example. The regressor implements the e-SVR learning algorithm discussed in [CC Chang & CJ Lin, 2011]. In this example a dataset is loaded from a file and then split in train and test.
+
+#### General Purpose:
+* **ClassificationDemo** (it.uniroma2.sag.kelp.examples.main): it is a meta-learner that takes in input a Json description and a dataset.
+
+
 
 
 [sag-site]: http://sag.art.uniroma2.it "SAG site"

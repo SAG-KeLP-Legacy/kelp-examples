@@ -14,12 +14,13 @@ Clone this project to obtain access to these examples by:
 git clone https://github.com/SAG-KeLP/kelp-examples.git
 ```
 
+NOTE: many of the provided examples require some memory in order to load the datasets and set up the kernel cache. You can assign memory to the Java Virtual Machine (JVM) using the option -Xmx. For instance -Xmx2G will provide 2G of memory to the JVM. In Eclipse such parameter shuld be written in Run->Run Configurations->Arguments->VM arguments .
 
 ## What you can find in the kelp-examples package
 
 #### Classification:
 * **QuestionClassification** (it.uniroma2.sag.kelp.examples.demo.qc): this class implements the Question Classification demo. It includes both kernel operating on vectors and kernel operating on trees (stk and ptk).
-* **QuestionClassificationLearningFromJson** (it.uniroma2.examples.demo.qc): the same demo as QuestionClassificaiton with the difference that the learning algorithm specification is read from a Json file.
+* **QuestionClassificationLearningFromJson** (it.uniroma2.examples.demo.qc): the same demo as QuestionClassification with the difference that the learning algorithm specification is read from a Json file.
 * **RCV1BinaryTextCategorizationLibLinear**, **RCV1BinaryTextCategorizationPA** and **RCV1BinaryTextCategorizationPegasos** (it.uniroma2.sag.kelp.examples.demo.rcv1) are examples of binary classifiers on the RCV1 dataset that can be found on the LibLinear website. These classes perform a N-Fold Cross Validation and show KeLP facilities to divide a dataset in N-Fold.
 * **TweetSentimentAnalysisSemeval2013** (it.uniroma2.sag.kelp.examples.demo.tweetsent2013): a demo with multiple kernels and multiple classes on a dataset on Twitter Sentiment Analysis from Semeval2013.
 * **OneVsAllSVMExample** (it.uniroma2.sag.kelp.examples.main): an example that shows the usage of the OneVsAll strategy with SVM over the IRIS dataset.

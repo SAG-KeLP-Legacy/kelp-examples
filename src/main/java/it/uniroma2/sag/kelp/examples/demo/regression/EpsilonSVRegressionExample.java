@@ -38,6 +38,10 @@ import java.util.Random;
  * In this example a dataset is loaded from a file and then split in train and
  * test.
  * 
+ * The dataset used in this example is the MG dataset. It can be downloaded
+ * from:
+ * http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/regression/mg_scale
+ * 
  * 
  * @author Danilo Croce
  * 

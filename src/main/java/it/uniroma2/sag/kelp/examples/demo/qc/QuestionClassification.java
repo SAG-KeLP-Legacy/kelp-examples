@@ -96,7 +96,7 @@ public class QuestionClassification {
 			ovaLearner.setBaseAlgorithm(svmSolver);
 			ovaLearner.setLabels(classes);
 			serializer.writeValueOnFile(ovaLearner,
-					"src/main/resources/qc/learningAlgorithmSpecification.klp");
+					"src/main/resources/qc/learningAlgorithmSpecificationFromJavaCode.klp");
 
 			// learn and get the prediction function
 			ovaLearner.learn(trainingSet);

@@ -42,6 +42,8 @@ public class QuestionClassificationLearningFromJson {
 			JacksonSerializerWrapper serializer = new JacksonSerializerWrapper();
 			OneVsAllLearning ovaLearner = serializer.readValue(
 					new File("src/main/resources/qc/learningAlgorithmSpecification.klp"), OneVsAllLearning.class);
+			
+			ovaLearner.setLabels(classes);
 
 			// learn and get the prediction function
 			ovaLearner.learn(trainingSet);

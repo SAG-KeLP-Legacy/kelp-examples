@@ -37,10 +37,12 @@ public class RCV1BinaryTextCategorizationLibLinearExperimentUtils {
 	}
 
 	private static float[] macroMeasure(List<BinaryClassificationEvaluator> nFoldCrossValidation) {
+		//TODO: metterlo public e dentro ExperimentsUtils e passare in ingresso una String identificativa della metrica 
 		float[] ret = new float[2];
 		float sum = 0.0f;
-		for (BinaryClassificationEvaluator f : nFoldCrossValidation)
+		for (BinaryClassificationEvaluator f : nFoldCrossValidation){
 			sum += f.getF1();
+		}
 		ret[0] = sum / (float) nFoldCrossValidation.size();
 
 		sum = 0.0f;

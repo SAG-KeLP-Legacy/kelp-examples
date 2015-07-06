@@ -99,7 +99,7 @@ public class SequenceKernelExample {
 			}
 
 			System.out.println("Accuracy: "
-					+ ev.getPerformanceMeasure("getAccuracy"));
+					+ ev.getPerformanceMeasure("accuracy"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

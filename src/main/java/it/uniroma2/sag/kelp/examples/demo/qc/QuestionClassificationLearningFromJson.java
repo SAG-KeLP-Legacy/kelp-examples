@@ -55,7 +55,6 @@ public class QuestionClassificationLearningFromJson {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
 				evaluator.addCount(e, p);
 			}
-			evaluator.compute();
 
 			System.out.println("Accuracy: " + evaluator.getAccuracy());
 		} catch (Exception e1) {

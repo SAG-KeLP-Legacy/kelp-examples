@@ -78,7 +78,6 @@ public class ClassificationDemo {
 			evaluator.addCount(ex, prediction);
 		}
 		
-		evaluator.compute();
 		System.out.println("ACC: " + evaluator.getPerformanceMeasure("accuracy"));
 		if(isBinaryTask){
 			System.out.println("F1: " + evaluator.getPerformanceMeasure("F1"));

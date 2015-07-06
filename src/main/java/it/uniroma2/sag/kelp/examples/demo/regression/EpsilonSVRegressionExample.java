@@ -100,7 +100,6 @@ public class EpsilonSVRegressionExample {
 			// Update the evaluator
 			evaluator.addCount(e, prediction);
 		}
-		evaluator.compute();
 
 		// Get the Mean Squared Error for the targeted label
 		float measSquareError = evaluator.getMeanSquaredError(label);

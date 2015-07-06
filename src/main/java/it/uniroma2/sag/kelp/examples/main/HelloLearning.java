@@ -91,7 +91,8 @@ public class HelloLearning {
 			int cf1=0;
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-				tobe++;
+				if (e.isExampleOf(positiveClass))
+					tobe++;
 				if (p.getScore(positiveClass) >= 0)
 					predicted++;
 				if (p.getScore(positiveClass) >= 0
@@ -114,11 +115,11 @@ public class HelloLearning {
 			float f1 = 2*prec*rec/(prec+rec);
 			
 			System.out.println("ClassificationEvaluator Accuracy: "
-					+ ev.getPerformanceMeasure("getAccuracy"));
+					+ ev.getPerformanceMeasure("Accuracy"));
 			System.out.println("InClass F1: "
 					+ f1);
 			System.out.println("ClassificationEvaluatorF1: "
-					+ ev.getPerformanceMeasure("getF1"));
+					+ ev.getPerformanceMeasure("F1"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

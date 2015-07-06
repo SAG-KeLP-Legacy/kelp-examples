@@ -28,6 +28,7 @@ import it.uniroma2.sag.kelp.learningalgorithm.classification.multiclassification
 import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.KernelizedPassiveAggressiveClassification;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.multiclass.OneVsAllClassifier;
+import it.uniroma2.sag.kelp.utils.evaluation.MulticlassClassificationEvaluator;
 
 import java.util.List;
 
@@ -105,18 +106,15 @@ public class OneVsAllPassiveAggressiveExample {
 			long endLearningTime = System.currentTimeMillis();
 
 			// classify examples and compute some statistics
-			int correct = 0;
+			MulticlassClassificationEvaluator ev = new MulticlassClassificationEvaluator(classes);
 			for (Example e : testSet.getExamples()) {
 				OneVsAllClassificationOutput prediction = f.predict(e);
-				System.out.println(e.getLabels()[0] + "\t" + prediction.getPredictedClasses().get(0));
-				if (e.isExampleOf(prediction.getPredictedClasses().get(0)))
-					correct++;
+				ev.addCount(e, prediction);
 			}
 
 			System.out
 					.println("Accuracy: "
-							+ ((float) correct / (float) testSet
-									.getNumberOfExamples()));
+							+ ev.getAccuracy());
 			System.out.println("Learning time without cache: " + (endLearningTime-startLearningTime) + " ms");
 		} catch (Exception e1) {
 			e1.printStackTrace();

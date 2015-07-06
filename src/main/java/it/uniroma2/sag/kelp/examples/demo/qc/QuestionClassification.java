@@ -170,7 +170,6 @@ public class QuestionClassification {
 						+ p.getPredictedClasses());
 				System.out.println();
 			}
-			evaluator.compute();
 
 			System.out.println("Accuracy: " + evaluator.getAccuracy());
 		} catch (Exception e1) {

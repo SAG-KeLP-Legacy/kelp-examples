@@ -5,11 +5,13 @@ import java.util.List;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.data.label.StringLabel;
 import it.uniroma2.sag.kelp.learningalgorithm.LearningAlgorithm;
-import it.uniroma2.sag.kelp.learningalgorithm.classification.liblinear.LibLinearLearningAlgorithm;
+import it.uniroma2.sag.kelp.learningalgorithm.PassiveAggressive;
+import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.LinearPassiveAggressiveClassification;
+import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.PassiveAggressiveClassification;
 import it.uniroma2.sag.kelp.utils.ExperimentUtils;
 import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
 
-public class RCV1BinaryTextCategorizationLibLinearExperimentUtils {
+public class RCV1BinaryTextCategorizationPAExperimentUtils {	
 	public static void main(String[] args) {
 		System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "WARN");
 
@@ -23,19 +25,19 @@ public class RCV1BinaryTextCategorizationLibLinearExperimentUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		StringLabel posLabel = new StringLabel("1");
 
-		LearningAlgorithm learningAlgorithm = getLearningAlgorithm(c, "VEC", posLabel);
+		LearningAlgorithm learningAlgorithm = getLearningAlgorithm(c,"VEC", posLabel);
 		BinaryClassificationEvaluator ev = new BinaryClassificationEvaluator(posLabel);
-		List<BinaryClassificationEvaluator> nFoldCrossValidation = ExperimentUtils.nFoldCrossValidation(nfold,
-				learningAlgorithm, allData, ev);
-
+		List<BinaryClassificationEvaluator> nFoldCrossValidation = ExperimentUtils.nFoldCrossValidation(nfold, learningAlgorithm, allData, ev);
+		
 		float[] values = getValuesFrom(nFoldCrossValidation);
 		float mean = it.uniroma2.sag.kelp.utils.Math.getMean(values);
 		double standardDeviation = it.uniroma2.sag.kelp.utils.Math.getStandardDeviation(values);
 		
-		System.out.println("Accuracy mean/std on test set=" + mean + "/" + standardDeviation);	}
+		System.out.println("Accuracy mean/std on test set=" + mean + "/" + standardDeviation);
+	}
 	
 	private static float[] getValuesFrom(List<BinaryClassificationEvaluator> nFoldCrossValidation) {
 		float[] ret = new float[nFoldCrossValidation.size()];
@@ -45,10 +47,10 @@ public class RCV1BinaryTextCategorizationLibLinearExperimentUtils {
 		return ret;
 	}
 
-	public static LearningAlgorithm getLearningAlgorithm(float param, String representation,
-			StringLabel positiveLabel) {
-		LibLinearLearningAlgorithm algo = new LibLinearLearningAlgorithm(param, param, representation);
-		algo.setLabel(positiveLabel);
+	public static LearningAlgorithm getLearningAlgorithm(float param, String representation, StringLabel positiveLabel) {
+		LinearPassiveAggressiveClassification algo = new LinearPassiveAggressiveClassification(param, param,
+				PassiveAggressiveClassification.Loss.RAMP, PassiveAggressive.Policy.PA_II, "VEC", positiveLabel);
+
 		return algo;
 	}
 }

@@ -34,7 +34,7 @@ public class TweetSentimentAnalysisSemeval2013 {
 		float split = 0.8f;
 		String train_file = "src/main/resources/tweetSentiment2013/train.klp.gz";
 		String test_file = "src/main/resources/tweetSentiment2013/test.klp.gz";
-		int kernelmode = 5;
+		int kernelmode = 1;
 		float polyD = 0;
 		float gamma = 0;
 
@@ -144,8 +144,6 @@ public class TweetSentimentAnalysisSemeval2013 {
 		posNegNeu.add(pos);
 		posNegNeu.add(neg);
 		posNegNeu.add(neu);
-
-		evaluator.compute();
 
 		StringBuilder b = new StringBuilder();
 		for (Label l : posNegNeu) {

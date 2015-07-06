@@ -104,11 +104,11 @@ public class OneVsAllSVMExample {
 			as[0] = twoLabels;
 
 			System.out.println("Mean F1: "
-					+ ev.getPerformanceMeasure("getMeanF1"));
-			System.out.println("Mean F1: "
-					+ ev.getPerformanceMeasure("getMeanF1For", as));
+					+ ev.getPerformanceMeasure("MeanF1"));
+			System.out.println("Mean F1 For iris-setosa/iris-virginica: "
+					+ ev.getPerformanceMeasure("MeanF1For", as));
 			System.out.println("F1: "
-					+ ev.getPerformanceMeasure("getOverallF1"));
+					+ ev.getPerformanceMeasure("OverallF1"));
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

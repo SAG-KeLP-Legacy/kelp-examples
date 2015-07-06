@@ -80,9 +80,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+<!-- 							<mainClass>it.uniroma2.sag.kelp.examples.main.Learn</mainClass> -->
+							<mainClass>it.uniroma2.sag.kelp.examples.main.Classify</mainClass>
+						</manifest>
+					</archive>
+<!-- 					<finalName>kelp-learn</finalName> -->
+					<finalName>kelp-classify</finalName>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
 	<dependencies>
 		<dependency>
 			<groupId>it.uniroma2.sag.kelp</groupId>

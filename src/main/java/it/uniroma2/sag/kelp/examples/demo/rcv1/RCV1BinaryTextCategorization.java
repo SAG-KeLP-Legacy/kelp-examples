@@ -40,8 +40,10 @@ public abstract class RCV1BinaryTextCategorization {
 			}
 		}
 
-		float[] perf = macroMeasure(accuracies);
-		System.out.println("Accuracy mean/std on test set=" + perf[0] + "/" + perf[1]);
+		float mean = it.uniroma2.sag.kelp.utils.Math.getMean(accuracies);
+		double standardDeviation = it.uniroma2.sag.kelp.utils.Math.getStandardDeviation(accuracies);
+		
+		System.out.println("Accuracy mean/std on test set=" + mean + "/" + standardDeviation);
 	}
 
 	private float test(SimpleDataset trainingSet, float c, SimpleDataset testSet)
@@ -65,23 +67,6 @@ public abstract class RCV1BinaryTextCategorization {
 
 	protected abstract LearningAlgorithm getLearningAlgorithm(float param, String representation,
 			StringLabel positiveLabel);
-
-	private float[] macroMeasure(float[] values) {
-		float[] ret = new float[2];
-		float sum = 0.0f;
-		for (float f : values)
-			sum += f;
-		ret[0] = sum / (float) values.length;
-
-		sum = 0.0f;
-
-		for (float f : values)
-			sum += (f - ret[0]) * (f - ret[0]);
-		sum = sum / ((float) values.length-1);
-		ret[1] = (float) Math.sqrt(sum);
-
-		return ret;
-	}
 
 	private static SimpleDataset getAllExcept(Dataset[] folds, int i) {
 		SimpleDataset ret = new SimpleDataset();

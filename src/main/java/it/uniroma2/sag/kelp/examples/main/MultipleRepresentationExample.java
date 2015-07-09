@@ -27,6 +27,7 @@ import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 import it.uniroma2.sag.kelp.learningalgorithm.classification.passiveaggressive.KernelizedPassiveAggressiveClassification;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.ClassificationOutput;
 import it.uniroma2.sag.kelp.predictionfunction.classifier.Classifier;
+import it.uniroma2.sag.kelp.utils.evaluation.BinaryClassificationEvaluator;
 
 /**
  * 
@@ -119,21 +120,15 @@ public class MultipleRepresentationExample {
 			Classifier f = kPA.getPredictionFunction();
 
 			// classify examples and compute some statistics
-			int correct = 0;
+			BinaryClassificationEvaluator ev = new BinaryClassificationEvaluator(positiveClass);
 			for (Example e : testSet.getExamples()) {
 				ClassificationOutput p = f.predict(testSet.getNextExample());
-				if (p.getScore(positiveClass) > 0
-						&& e.isExampleOf(positiveClass))
-					correct++;
-				else if (p.getScore(positiveClass) < 0
-						&& !e.isExampleOf(positiveClass))
-					correct++;
+				ev.addCount(e, p);
 			}
 
 			System.out
 					.println("Accuracy: "
-							+ ((float) correct / (float) testSet
-									.getNumberOfExamples()));
+							+ ev.getAccuracy());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

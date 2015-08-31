@@ -15,14 +15,15 @@
 
 package it.uniroma2.sag.kelp.examples.demo.clustering;
 
+import java.io.File;
+
 import it.uniroma2.sag.kelp.data.clustering.Cluster;
 import it.uniroma2.sag.kelp.data.clustering.ClusterExample;
+import it.uniroma2.sag.kelp.data.clustering.ClusterList;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.learningalgorithm.clustering.kmeans.LinearKMeansEngine;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.ObjectSerializer;
-
-import java.util.List;
 
 /**
  * This class contains an example of the usage of the Linear K-means clustering.
@@ -53,7 +54,7 @@ public class LinearKMeansClusteringExample {
 		System.out.println(serializer.writeValueAsString(clusteringEngine));
 
 		// Run the clustering
-		List<Cluster> clusterList = clusteringEngine.cluster(dataset);
+		ClusterList clusterList = clusteringEngine.cluster(dataset);
 
 		System.out.println("\n==================");
 		System.out.println("Resulting clusters");

@@ -17,6 +17,7 @@ package it.uniroma2.sag.kelp.examples.demo.clustering;
 
 import it.uniroma2.sag.kelp.data.clustering.Cluster;
 import it.uniroma2.sag.kelp.data.clustering.ClusterExample;
+import it.uniroma2.sag.kelp.data.clustering.ClusterList;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.kernel.Kernel;
 import it.uniroma2.sag.kelp.kernel.cache.FixIndexKernelCache;
@@ -24,8 +25,6 @@ import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 import it.uniroma2.sag.kelp.learningalgorithm.clustering.kernelbasedkmeans.KernelBasedKMeansEngine;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.ObjectSerializer;
-
-import java.util.List;
 
 /**
  * This class contains an example of the usage of the Kernel-based clustering.
@@ -73,7 +72,7 @@ public class KernelBasedClusteringExample {
 		System.out.println(serializer.writeValueAsString(clusteringEngine));
 
 		// Run the clustering
-		List<Cluster> clusterList = clusteringEngine.cluster(dataset);
+		ClusterList clusterList = clusteringEngine.cluster(dataset);
 
 		System.out.println("\n==================");
 		System.out.println("Resulting clusters");

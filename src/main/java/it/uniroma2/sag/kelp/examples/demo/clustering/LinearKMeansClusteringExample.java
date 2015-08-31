@@ -15,8 +15,6 @@
 
 package it.uniroma2.sag.kelp.examples.demo.clustering;
 
-import java.io.File;
-
 import it.uniroma2.sag.kelp.data.clustering.Cluster;
 import it.uniroma2.sag.kelp.data.clustering.ClusterExample;
 import it.uniroma2.sag.kelp.data.clustering.ClusterList;

@@ -20,6 +20,7 @@ import it.uniroma2.sag.kelp.data.clustering.ClusterExample;
 import it.uniroma2.sag.kelp.data.clustering.ClusterList;
 import it.uniroma2.sag.kelp.data.dataset.SimpleDataset;
 import it.uniroma2.sag.kelp.learningalgorithm.clustering.kmeans.LinearKMeansEngine;
+import it.uniroma2.sag.kelp.learningalgorithm.clustering.kmeans.LinearKMeansExample;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.ObjectSerializer;
 
@@ -60,7 +61,8 @@ public class LinearKMeansClusteringExample {
 		// Writing the resulting clusters and cluster members
 		for (Cluster cluster : clusterList) {
 			for (ClusterExample clusterMember : cluster.getExamples()) {
-				System.out.println(cluster.getLabel() + "\t"
+				float dist = ((LinearKMeansExample) clusterMember).getDist();
+				System.out.println(dist + "\t" + cluster.getLabel() + "\t"
 						+ clusterMember.getExample());
 			}
 			System.out.println();

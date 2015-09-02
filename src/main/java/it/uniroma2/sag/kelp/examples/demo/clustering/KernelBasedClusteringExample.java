@@ -23,6 +23,7 @@ import it.uniroma2.sag.kelp.kernel.Kernel;
 import it.uniroma2.sag.kelp.kernel.cache.FixIndexKernelCache;
 import it.uniroma2.sag.kelp.kernel.vector.LinearKernel;
 import it.uniroma2.sag.kelp.learningalgorithm.clustering.kernelbasedkmeans.KernelBasedKMeansEngine;
+import it.uniroma2.sag.kelp.learningalgorithm.clustering.kernelbasedkmeans.KernelBasedKMeansExample;
 import it.uniroma2.sag.kelp.utils.JacksonSerializerWrapper;
 import it.uniroma2.sag.kelp.utils.ObjectSerializer;
 
@@ -80,7 +81,9 @@ public class KernelBasedClusteringExample {
 		// Writing the resulting clusters and cluster members
 		for (Cluster cluster : clusterList) {
 			for (ClusterExample clusterMember : cluster.getExamples()) {
-				System.out.println(cluster.getLabel() + "\t"
+				float dist = ((KernelBasedKMeansExample) clusterMember)
+						.getDist();
+				System.out.println(dist + "\t" + cluster.getLabel() + "\t"
 						+ clusterMember.getExample());
 			}
 			System.out.println();
